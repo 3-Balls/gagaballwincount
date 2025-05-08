@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>scf rpg</title>
+  <h3> a simple school rpg for fun </h3>
+  <h1> </h1>
+  <h2> Dont get called on in Class</h2>
+  <h2> Tell stories for 20 minutes before class starts</h2>
+</head>
+<body>
+  <h1>Number of Completed Quests</h1>
+  <p>Count: <span id="counter">0</span></p>
+  <button onclick="incrementCounter()">Click Me!</button>
+  <button onclick="resetCounter()">Reset</button>
+
+  <script>
+    function setCookie(name, value, days) {
+      const expires = new Date(Date.now() + days * 864e5).toUTCString();
+      document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+    }
+
+    function getCookie(name) {
+      return document.cookie.split('; ').reduce((r, v) => {
+        const parts = v.split('=');
+        return parts[0] === name ? parts[1] : r;
+      }, '');
+    }
+
+    function deleteCookie(name) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    }
+
+    let count = parseInt(getCookie('clickCounter')) || 0;
+    document.getElementById('counter').textContent = count;
+
+    function incrementCounter() {
+      count++;
+      document.getElementById('counter').textContent = count;
+      setCookie('clickCounter', count, 30);
+    }
+
+    function resetCounter() {
+      count = 0;
+      document.getElementById('counter').textContent = count;
+      deleteCookie('clickCounter');
+    }
+  </script>
+</body>
+</html>
